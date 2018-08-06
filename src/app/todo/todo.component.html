@@ -1,0 +1,82 @@
+<button class="tertiary" type="button" (click)="showCreateModal()">
+  Add Todo
+</button>
+<table class="hoverable">
+  <caption>To Do</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Status</th>
+      <th>Task</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let todo of todos">
+      <td>
+        <input type="checkbox" [checked]="todo.complete" (change)="changeTodoStatus(todo)">
+      </td>
+      <td>
+        <div *ngIf="!todo.complete;else not_complete">
+          <i-x-circle></i-x-circle>  
+        </div>
+       <ng-template #not_complete>
+         <i-check-circle></i-check-circle>
+       </ng-template> 
+      </td>
+      <td data-label="Task">{{todo.title}}</td>
+      <td>
+      	<div class="button-group">
+		  <button class="primary" (click)="showEditModal(todo)">Edit</button>
+		  <button class="secondary" type="button" (click)="showDeleteModal(todo.id)">Delete</button>
+		</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<input type="checkbox" id="modal-control" class="modal">
+<div [ngClass]="{'todo-modal': isDeleteModal }">
+  <div class="card" >
+    <div for="modal-control" class="modal-close" (click)="closeDeleteModal()"></div>
+    <h3 class="section">Delete</h3>
+    <p>Are you sure to delete this todo ?</p>
+    <div class="button-group">
+      <button type="button" class="secondary" (click)="deleteTodo()">Yes</button>
+      <button type="button" (click)="closeDeleteModal()">No</button>
+    </div>
+  </div>
+</div>
+
+<input type="checkbox" id="modal-control" class="modal">
+<div [ngClass]="{'todo-modal': isCreateModal }">
+  <div class="card" >
+    <div for="modal-control" class="modal-close" (click)="closeCreateModal()"></div>
+    <h3 class="section">Add Todo</h3>
+    <form>
+      <label for="title">Title</label>
+      <input type="text" #title/>
+    </form>
+    <div class="button-group">
+      <button type="button" class="tertiary" (click)="createTodo(title.value)">Save</button>
+      <button type="button" (click)="closeCreateModal()">No</button>
+    </div>
+  </div>
+</div>
+
+<input type="checkbox" id="modal-control" class="modal">
+<div [ngClass]="{'todo-modal': isEditModal }">
+  <div class="card" >
+    <div for="modal-control" class="modal-close" (click)="closeEditModal()"></div>
+    <h3 class="section">Edit Todo</h3>
+    <form>
+      <label for="title">Title</label>
+      <input type="text" name="edit_title" [ngModel]="selectedTodo?.title" 
+      (ngModelChange)="selectedTodo?.title ? selectedTodo.title = $event : null" #edit_title/>
+    </form>
+    <div class="button-group">
+      <button type="button" class="tertiary" (click)="changeTitle(edit_title.value)">Update</button>
+      <button type="button" (click)="closeEditModal()">No</button>
+    </div>
+  </div>
+</div>

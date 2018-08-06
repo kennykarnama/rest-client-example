@@ -1,0 +1,16 @@
+div.todo-modal{
+	display: flex;
+	position: absolute;
+	z-index: 1210;
+}
+div.close{
+	display: none;
+}
+
+table tr > th{
+	text-align: center;
+}
+
+table tr > td{
+	text-align: center;
+}

@@ -1,6 +1,8 @@
+<!-- Button to add new todo -->
 <button class="tertiary" type="button" (click)="showCreateModal()">
   Add Todo
 </button>
+<!-- Table to display todo list -->
 <table class="hoverable">
   <caption>To Do</caption>
   <thead>
@@ -34,7 +36,7 @@
     </tr>
   </tbody>
 </table>
-
+<!-- Delete todo confirmation window -->
 <input type="checkbox" id="modal-control" class="modal">
 <div [ngClass]="{'todo-modal': isDeleteModal }">
   <div class="card" >
@@ -47,7 +49,7 @@
     </div>
   </div>
 </div>
-
+<!-- Todo create modal -->
 <input type="checkbox" id="modal-control" class="modal">
 <div [ngClass]="{'todo-modal': isCreateModal }">
   <div class="card" >
@@ -63,7 +65,7 @@
     </div>
   </div>
 </div>
-
+<!-- Todo edit modal -->
 <input type="checkbox" id="modal-control" class="modal">
 <div [ngClass]="{'todo-modal': isEditModal }">
   <div class="card" >

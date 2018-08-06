@@ -9,17 +9,46 @@ import { TodoService } from './todo.service';
 })
 export class TodoComponent implements OnInit {
  
+ /**
+  * Todo list
+  * @type {Todo[]}
+  */
   todos:Todo[];
-
+  /**
+   * deleteModal prop
+   * @type {boolean}
+   */
   isDeleteModal:boolean;
+  /**
+   * createModal prop
+   * @type {boolean}
+   */
   isCreateModal:boolean;
+  /**
+   * createModal prop
+   * @type {boolean}
+   */
   isEditModal:boolean;
+  /**
+   * selected todo id
+   * @type {number}
+   */
   selectedTodoId:number;
+  /**
+   * selected todo
+   * @type {Todo}
+   */
   selectedTodo:Todo;
-
+  /**
+   * Constructor
+   * Register todo service
+   * @param {TodoService} private todoService
+   */
   constructor(private todoService: TodoService) { 
   }
-
+  /**
+   * Init
+   */
   ngOnInit() {
   	this.getAllToDos();
     this.isDeleteModal = false;
@@ -77,7 +106,10 @@ export class TodoComponent implements OnInit {
     }
 
   }
-
+  /**
+   * Change todo status
+   * @param {Todo} todo
+   */
   changeTodoStatus(todo: Todo){
     //negate
     todo.complete = !todo.complete;
@@ -89,7 +121,10 @@ export class TodoComponent implements OnInit {
      );
 
   }
-
+  /**
+   * Change todo title
+   * @param {string} title
+   */
   changeTitle(title: string){
    if(this.selectedTodo){
      this.todoService.updateTodo(this.selectedTodo).subscribe(
@@ -99,30 +134,44 @@ export class TodoComponent implements OnInit {
        );
    }
   }
-
+  /**
+   * Show create modal
+   */
   showCreateModal(){
     this.isCreateModal = true;
   }
-
+  /**
+   * Close create modal
+   */
   closeCreateModal(){
     this.isCreateModal = false;
   }
-
+  /**
+   * Show edit modal
+   * @param {Todo} selectedTodo
+   */
   showEditModal(selectedTodo:Todo){
     this.selectedTodo = selectedTodo;
     this.isEditModal = true;
   }
-
+  /**
+   * Close edit modal
+   */
   closeEditModal(){
     this.isEditModal = false;
   }
-
+  /**
+   * Show delete modal
+   * @param {number} selectedTodoId
+   */
   showDeleteModal(selectedTodoId: number){
     this.selectedTodoId = selectedTodoId;
     this.isDeleteModal = true;
     console.log(this.selectedTodoId);
   }
-
+  /**
+   * Close delete modal
+   */
   closeDeleteModal(){
     this.isDeleteModal = false;
   }
